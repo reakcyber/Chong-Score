@@ -1,0 +1,777 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>Reak-Score</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        /* Inline modal styles for edit dialog */
+        .modal-overlay{position:fixed;inset:0;background:rgba(0,0,0,0.4);display:none;align-items:center;justify-content:center;z-index:9999}
+        .modal{background:#fff;padding:18px;border-radius:8px;max-width:720px;width:95%;box-shadow:0 10px 30px rgba(0,0,0,0.2)}
+        .modal h3{margin:0 0 12px}
+        .modal .fields{display:grid;grid-template-columns:1fr 1fr;gap:8px;max-height:60vh;overflow:auto;padding-right:6px}
+        .modal label{font-size:12px;color:#333}
+        .modal input{width:100%;padding:6px 8px;border:1px solid #ccc;border-radius:4px}
+        .modal .actions{display:flex;justify-content:flex-end;gap:8px;margin-top:12px}
+        .edit-hint{font-size:12px;color:#666;text-align:center;margin-bottom:8px}
+    </style>
+</head>
+<body>
+    <header>
+        <h3>Reak-Score</h3>
+    </header>
+    <br><br><br>
+    <section>
+        <h4 style="margin-top:18px">Exam " Final1 Y1 "</h4>
+        <div class="table-wrap">
+            <table aria-label="Exam scores table">
+                <caption class="sr-only">Exam scores by student</caption>
+                <thead>
+                    <tr>
+                        <th scope="col">Exam</th>
+                        <th scope="col1">A+ I</th>
+                        <th scope="col2">C++</th>
+                        <th scope="col3">CM</th>
+                        <th scope="col4">DS I</th>
+                        <th scope="col5">ENG 1</th>
+                        <th scope="col6">GD I</th>
+                        <th scope="col7">HIST</th>
+                        <th scope="col8">MGT</th>
+                        <th scope="col9">MS</th>
+                        <th scope="col">Date</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Midterm</td>
+                        <td>35</td>
+                        <td>28</td>
+                        <td>39</td>
+                        <td>26</td>
+                        <td>20</td>
+                        <td>34</td>
+                        <td>26</td>
+                        <td>33</td>
+                        <td>31</td>
+                        <td>2024-04-09</td>
+                    </tr>
+                </tbody>
+                <tbody>
+                    <tr>
+                        <td>Final1</td>
+                        <td>55</td>
+                        <td>33</td>
+                        <td>39</td>
+                        <td>37</td>
+                        <td>54</td>
+                        <td>57</td>
+                        <td>43</td>
+                        <td>36</td>
+                        <td>51</td>
+                        <td>2024-06-28</td>
+                    </tr>
+                </tbody>
+                <tbody>
+                    <tr>
+                        <td>Total</td>
+                        <td>90</td>
+                        <td>61</td>
+                        <td>78</td>
+                        <td>63</td>
+                        <td>74</td>
+                        <td>91</td>
+                        <td>69</td>
+                        <td>69</td>
+                        <td>82</td>
+                        <td>2024-06-28</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <br>
+
+        <h4 style="margin-top:18px">Exam " Final2 Y1 "</h4>
+        <div class="table-wrap">
+            <table aria-label="Exam scores table">
+                <caption class="sr-only">Exam scores by student</caption>
+                <thead>
+                    <tr>
+                        <th scope="col">Exam</th>
+                        <th scope="col1">A+ I</th>
+                        <th scope="col2">C#</th>
+                        <th scope="col3">ACC</th>
+                        <th scope="col4">DS II</th>
+                        <th scope="col5">ENG II</th>
+                        <th scope="col6">GD II</th>
+                        <th scope="col7">CC</th>
+                        <th scope="col8">PR</th>
+                        <th scope="col9">WD</th>
+                        <th scope="col">Date</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Midterm</td>
+                        <td>31</td>
+                        <td>29</td>
+                        <td>28</td>
+                        <td>36</td>
+                        <td>29</td>
+                        <td>37</td>
+                        <td>25</td>
+                        <td>31</td>
+                        <td>39</td>
+                        <td>2024-09-02</td>
+                    </tr>
+                </tbody>
+                <tbody>
+                    <tr>
+                        <td>Final2</td>
+                        <td>48</td>
+                        <td>52</td>
+                        <td>40</td>
+                        <td>32</td>
+                        <td>57</td>
+                        <td>38</td>
+                        <td>56</td>
+                        <td>44</td>
+                        <td>51</td>
+                        <td>2024-12-02</td>
+                    </tr>
+                </tbody>
+                <tbody>
+                    <tr>
+                        <td>Total</td>
+                        <td>83</td>
+                        <td>61</td>
+                        <td>68</td>
+                        <td>68</td>
+                        <td>86</td>
+                        <td>75</td>
+                        <td>81</td>
+                        <td>75</td>
+                        <td>90</td>
+                        <td>2024-12-02</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <br>
+        <hr style="height: 1.5px; background-color: black;">
+        <br>
+
+        <h4 style="margin-top:18px">Exam " Final1 Y2 "</h4>
+        <div class="table-wrap">
+            <table aria-label="Exam scores table">
+                <caption class="sr-only">Exam scores by student</caption>
+                <thead>
+                    <tr>
+                        <th scope="col">Exam</th>
+                        <th scope="col1">C A/C</th>
+                        <th scope="col2">C# II</th>
+                        <th scope="col3">DATA</th>
+                        <th scope="col4">DSA I</th>
+                        <th scope="col5">GD III</th>
+                        <th scope="col6">NET I</th>
+                        <th scope="col7">SP I</th>
+                        <th scope="col8">UX/UI</th>
+                        <th scope="col9">WD II</th>
+                        <th scope="col">Date</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Midterm</td>
+                        <td>39</td>
+                        <td>32</td>
+                        <td>33</td>
+                        <td>26</td>
+                        <td>31</td>
+                        <td>36</td>
+                        <td>34</td>
+                        <td>32</td>
+                        <td>37</td>
+                        <td>2025-02-24</td>
+                    </tr>
+                </tbody>
+                <tbody>
+                    <tr>
+                        <td>Final1</td>
+                        <td>59</td>
+                        <td>38</td>
+                        <td>42</td>
+                        <td>39</td>
+                        <td>49</td>
+                        <td>56</td>
+                        <td>40</td>
+                        <td>57</td>
+                        <td>60</td>
+                        <td>2025-05-19</td>
+                    </tr>
+                </tbody>
+                <tbody>
+                    <tr>
+                        <td>Total</td>
+                        <td>98</td>
+                        <td>70</td>
+                        <td>75</td>
+                        <td>65</td>
+                        <td>80</td>
+                        <td>92</td>
+                        <td>74</td>
+                        <td>89</td>
+                        <td>97</td>
+                        <td>2025-05-19</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <br>
+
+        <h4 style="margin-top:18px">Exam " Final2 Y2 "</h4>
+        <div class="table-wrap">
+            <table aria-label="Exam scores table">
+                <caption class="sr-only">Exam scores by student</caption>
+                <thead>
+                    <tr>
+                        <th scope="col">Exam</th>
+                        <th scope="col1">3GD</th>
+                        <th scope="col2">ACD</th>
+                        <th scope="col3">C# III</th>
+                        <th scope="col4">DSA II</th>
+                        <th scope="col5">DSM</th>
+                        <th scope="col6">NET II</th>
+                        <th scope="col7">SM I</th>
+                        <th scope="col8">SP II</th>
+                        <th scope="col9">WD III</th>
+                        <th scope="col">Date</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Midterm</td>
+                        <td>33</td>
+                        <td>38</td>
+                        <td>32</td>
+                        <td>40</td>
+                        <td>39</td>
+                        <td>37</td>
+                        <td>37</td>
+                        <td>34</td>
+                        <td>30</td>
+                        <td>2025-07-28</td>
+                    </tr>
+                </tbody>
+                <tbody>
+                    <tr>
+                        <td>Final2</td>
+                        <td>00</td>
+                        <td>00</td>
+                        <td>00</td>
+                        <td>00</td>
+                        <td>00</td>
+                        <td>00</td>
+                        <td>00</td>
+                        <td>00</td>
+                        <td>00</td>
+                        <td>2025-12-02</td>
+                    </tr>
+                </tbody>
+                <tbody>
+                    <tr>
+                        <td>Total</td>
+                        <td>00</td>
+                        <td>00</td>
+                        <td>00</td>
+                        <td>00</td>
+                        <td>00</td>
+                        <td>00</td>
+                        <td>00</td>
+                        <td>00</td>
+                        <td>00</td>
+                        <td>2025-12-02</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <h4 style="margin-top:18px">Exam " Final1 Y3 "</h4>
+        <div class="table-wrap">
+            <table aria-label="Exam scores table">
+                <caption class="sr-only">Exam scores by student</caption>
+                <thead>
+                    <tr>
+                        <th scope="col">Exam</th>
+                        <th scope="col1">3GD</th>
+                        <th scope="col2">ACD</th>
+                        <th scope="col3">C# III</th>
+                        <th scope="col4">DSA II</th>
+                        <th scope="col5">DSM</th>
+                        <th scope="col6">NET II</th>
+                        <th scope="col7">SM I</th>
+                        <th scope="col8">SP II</th>
+                        <th scope="col9">WD III</th>
+                        <th scope="col">Date</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Midterm</td>
+                        <td>00</td>
+                        <td>00</td>
+                        <td>00</td>
+                        <td>00</td>
+                        <td>00</td>
+                        <td>00</td>
+                        <td>00</td>
+                        <td>00</td>
+                        <td>00</td>
+                        <td>2025-07-28</td>
+                    </tr>
+                </tbody>
+                <tbody>
+                    <tr>
+                        <td>Final2</td>
+                        <td>00</td>
+                        <td>00</td>
+                        <td>00</td>
+                        <td>00</td>
+                        <td>00</td>
+                        <td>00</td>
+                        <td>00</td>
+                        <td>00</td>
+                        <td>00</td>
+                        <td>2025-12-02</td>
+                    </tr>
+                </tbody>
+                <tbody>
+                    <tr>
+                        <td>Total</td>
+                        <td>00</td>
+                        <td>00</td>
+                        <td>00</td>
+                        <td>00</td>
+                        <td>00</td>
+                        <td>00</td>
+                        <td>00</td>
+                        <td>00</td>
+                        <td>00</td>
+                        <td>2025-12-02</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <br>
+        <h4 style="margin-top:18px">Exam " Final2 Y3 "</h4>
+        <div class="table-wrap">
+            <table aria-label="Exam scores table">
+                <caption class="sr-only">Exam scores by student</caption>
+                <thead>
+                    <tr>
+                        <th scope="col">Exam</th>
+                        <th scope="col1">3GD</th>
+                        <th scope="col2">ACD</th>
+                        <th scope="col3">C# III</th>
+                        <th scope="col4">DSA II</th>
+                        <th scope="col5">DSM</th>
+                        <th scope="col6">NET II</th>
+                        <th scope="col7">SM I</th>
+                        <th scope="col8">SP II</th>
+                        <th scope="col9">WD III</th>
+                        <th scope="col">Date</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Midterm</td>
+                        <td>00</td>
+                        <td>00</td>
+                        <td>00</td>
+                        <td>00</td>
+                        <td>00</td>
+                        <td>00</td>
+                        <td>00</td>
+                        <td>00</td>
+                        <td>00</td>
+                        <td>2025-07-28</td>
+                    </tr>
+                </tbody>
+                <tbody>
+                    <tr>
+                        <td>Final2</td>
+                        <td>00</td>
+                        <td>00</td>
+                        <td>00</td>
+                        <td>00</td>
+                        <td>00</td>
+                        <td>00</td>
+                        <td>00</td>
+                        <td>00</td>
+                        <td>00</td>
+                        <td>2025-12-02</td>
+                    </tr>
+                </tbody>
+                <tbody>
+                    <tr>
+                        <td>Total</td>
+                        <td>00</td>
+                        <td>00</td>
+                        <td>00</td>
+                        <td>00</td>
+                        <td>00</td>
+                        <td>00</td>
+                        <td>00</td>
+                        <td>00</td>
+                        <td>00</td>
+                        <td>2025-12-02</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <br>
+        <h4 style="margin-top:18px">Exam " Final1 Y4 "</h4>
+        <div class="table-wrap">
+            <table aria-label="Exam scores table">
+                <caption class="sr-only">Exam scores by student</caption>
+                <thead>
+                    <tr>
+                        <th scope="col">Exam</th>
+                        <th scope="col1">3GD</th>
+                        <th scope="col2">ACD</th>
+                        <th scope="col3">C# III</th>
+                        <th scope="col4">DSA II</th>
+                        <th scope="col5">DSM</th>
+                        <th scope="col6">NET II</th>
+                        <th scope="col7">SM I</th>
+                        <th scope="col8">SP II</th>
+                        <th scope="col9">WD III</th>
+                        <th scope="col">Date</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Midterm</td>
+                        <td>00</td>
+                        <td>00</td>
+                        <td>00</td>
+                        <td>00</td>
+                        <td>00</td>
+                        <td>00</td>
+                        <td>00</td>
+                        <td>00</td>
+                        <td>00</td>
+                        <td>2025-07-28</td>
+                    </tr>
+                </tbody>
+                <tbody>
+                    <tr>
+                        <td>Final2</td>
+                        <td>00</td>
+                        <td>00</td>
+                        <td>00</td>
+                        <td>00</td>
+                        <td>00</td>
+                        <td>00</td>
+                        <td>00</td>
+                        <td>00</td>
+                        <td>00</td>
+                        <td>2025-12-02</td>
+                    </tr>
+                </tbody>
+                <tbody>
+                    <tr>
+                        <td>Total</td>
+                        <td>00</td>
+                        <td>00</td>
+                        <td>00</td>
+                        <td>00</td>
+                        <td>00</td>
+                        <td>00</td>
+                        <td>00</td>
+                        <td>00</td>
+                        <td>00</td>
+                        <td>2025-12-02</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <br>
+        <h4 style="margin-top:18px">Exam " Final2 Y4 "</h4>
+        <div class="table-wrap">
+            <table aria-label="Exam scores table">
+                <caption class="sr-only">Exam scores by student</caption>
+                <thead>
+                    <tr>
+                        <th scope="col">Exam</th>
+                        <th scope="col1">3GD</th>
+                        <th scope="col2">ACD</th>
+                        <th scope="col3">C# III</th>
+                        <th scope="col4">DSA II</th>
+                        <th scope="col5">DSM</th>
+                        <th scope="col6">NET II</th>
+                        <th scope="col7">SM I</th>
+                        <th scope="col8">SP II</th>
+                        <th scope="col9">WD III</th>
+                        <th scope="col">Date</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Midterm</td>
+                        <td>00</td>
+                        <td>00</td>
+                        <td>00</td>
+                        <td>00</td>
+                        <td>00</td>
+                        <td>00</td>
+                        <td>00</td>
+                        <td>00</td>
+                        <td>00</td>
+                        <td>2025-07-28</td>
+                    </tr>
+                </tbody>
+                <tbody>
+                    <tr>
+                        <td>Final2</td>
+                        <td>00</td>
+                        <td>00</td>
+                        <td>00</td>
+                        <td>00</td>
+                        <td>00</td>
+                        <td>00</td>
+                        <td>00</td>
+                        <td>00</td>
+                        <td>00</td>
+                        <td>2025-12-02</td>
+                    </tr>
+                </tbody>
+                <tbody>
+                    <tr>
+                        <td>Total</td>
+                        <td>00</td>
+                        <td>00</td>
+                        <td>00</td>
+                        <td>00</td>
+                        <td>00</td>
+                        <td>00</td>
+                        <td>00</td>
+                        <td>00</td>
+                        <td>00</td>
+                        <td>2025-12-02</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+    </section>
+    <div style="text-align:center; margin:24px 0;">
+        <button id="save-db">Save all tables to DB</button>
+        <span id="save-status" style="margin-left:12px;color:#333"></span>
+    </div>
+    <!-- Edit modal -->
+    <div id="modal-overlay" class="modal-overlay" aria-hidden="true">
+        <div class="modal" role="dialog" aria-modal="true" aria-labelledby="modal-title">
+            <h3 id="modal-title">Edit Exam Scores</h3>
+            <p class="edit-hint">Double-click any table row to open this editor. Change values and click Save to apply to the table.</p>
+            <div class="fields" id="modal-fields"></div>
+            <div class="actions">
+                <button id="modal-cancel">Cancel</button>
+                <button id="modal-save">Save</button>
+            </div>
+        </div>
+    </div>
+    <br><br><br><br>
+    <footer>
+        <p style="text-align:center; font-size:12px; color:#666;">&copy; 2025 Reak-Score. All rights reserved.</p>
+    </footer>
+    <br>
+    <script>
+        // Add data-label attributes to table cells for stacked mobile layout
+        (function(){
+            function applyDataLabels(){
+                document.querySelectorAll('table').forEach(function(table){
+                    const headers = Array.from(table.querySelectorAll('thead th')).map(th=>th.textContent.trim());
+                    table.querySelectorAll('tbody tr').forEach(function(row){
+                        Array.from(row.children).forEach(function(td,i){
+                            if(!td.hasAttribute('data-label')) td.setAttribute('data-label', headers[i] || '');
+                        });
+                    });
+                });
+            }
+            if(document.readyState==='loading') document.addEventListener('DOMContentLoaded', applyDataLabels);
+            else applyDataLabels();
+        })();
+    </script>
+    <script>
+    // Client-side: parse tables and POST to /api/scores
+    async function parseTables(){
+        const out = [];
+        document.querySelectorAll('section .table-wrap table').forEach(table=>{
+            const headers = Array.from(table.querySelectorAll('thead th')).map(th=>th.textContent.trim());
+            table.querySelectorAll('tbody').forEach(tbody=>{
+                tbody.querySelectorAll('tr').forEach(tr=>{
+                    const cells = Array.from(tr.children).map(td=>td.textContent.trim());
+                    const exam = cells[0] || '';
+                    const dateStr = cells[cells.length-1] || '';
+                    const subjects = {};
+                    for(let i=1;i<cells.length-1;i++){
+                        const key = headers[i] || `col${i}`;
+                        const val = cells[i];
+                        const n = Number(val);
+                        subjects[key] = Number.isNaN(n) ? val : n;
+                    }
+                    const doc = {
+                        exam,
+                        subjects,
+                        date: dateStr ? new Date(dateStr) : undefined,
+                        meta: { source: 'index.html' }
+                    };
+                    out.push(doc);
+                });
+            });
+        });
+        return out;
+    }
+
+    async function saveToDb(){
+        const btn = document.getElementById('save-db');
+        const status = document.getElementById('save-status');
+        btn.disabled = true;
+        status.textContent = 'Saving...';
+        try{
+            const data = await parseTables();
+            const resp = await fetch('/api/scores', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(data)
+            });
+            if(!resp.ok) throw new Error('Server responded '+resp.status);
+            const json = await resp.json();
+            status.textContent = `Saved ${json.length} documents`;
+        }catch(err){
+            console.error(err);
+            status.textContent = 'Save failed: '+err.message;
+        }finally{
+            btn.disabled = false;
+        }
+    }
+
+    document.getElementById('save-db').addEventListener('click', saveToDb);
+    </script>
+    <script>
+    // Edit modal logic
+    (function(){
+        const overlay = document.getElementById('modal-overlay');
+        const fieldsContainer = document.getElementById('modal-fields');
+        const btnSave = document.getElementById('modal-save');
+        const btnCancel = document.getElementById('modal-cancel');
+        let activeRow = null;
+
+        function openModalForRow(row){
+            activeRow = row;
+            fieldsContainer.innerHTML = '';
+            const table = row.closest('table');
+            const headers = Array.from(table.querySelectorAll('thead th')).map(th=>th.textContent.trim());
+            const cells = Array.from(row.children).map(td=>td.textContent.trim());
+
+            // create inputs for each column; first col is exam label (text), last is date
+            headers.forEach((h,i)=>{
+                const wrapper = document.createElement('div');
+                const label = document.createElement('label');
+                label.textContent = h || `col${i}`;
+                const input = document.createElement('input');
+                input.setAttribute('data-col-index', i);
+                input.value = cells[i] || '';
+                // date input for last column if it looks like a date
+                if(i===headers.length-1){
+                    input.type = 'date';
+                    // try to normalize existing text to yyyy-mm-dd
+                    const v = cells[i] || '';
+                    const d = new Date(v);
+                    if(!isNaN(d)){
+                        // format to yyyy-mm-dd
+                        const yyyy = d.getFullYear();
+                        const mm = String(d.getMonth()+1).padStart(2,'0');
+                        const dd = String(d.getDate()).padStart(2,'0');
+                        input.value = `${yyyy}-${mm}-${dd}`;
+                    }
+                } else if(i===0){
+                    input.type = 'text';
+                } else {
+                    // numeric inputs for scores when possible
+                    input.type = 'number';
+                    input.step = '1';
+                }
+
+                wrapper.appendChild(label);
+                wrapper.appendChild(input);
+                fieldsContainer.appendChild(wrapper);
+            });
+
+            overlay.style.display = 'flex';
+            overlay.setAttribute('aria-hidden','false');
+            // focus first input
+            const firstInput = fieldsContainer.querySelector('input');
+            if(firstInput) firstInput.focus();
+        }
+
+        function closeModal(){
+            overlay.style.display = 'none';
+            overlay.setAttribute('aria-hidden','true');
+            activeRow = null;
+        }
+
+        function applyEditsToRow(){
+            if(!activeRow) return;
+            const inputs = Array.from(fieldsContainer.querySelectorAll('input'));
+            inputs.forEach(inp=>{
+                const idx = Number(inp.getAttribute('data-col-index'));
+                let val = inp.value;
+                // for numeric columns try to keep as number in text, but table cell is text
+                if(inp.type==='number'){
+                    // empty -> keep empty
+                    val = val === '' ? '' : String(Number(val));
+                }
+                // date input -> keep raw yyyy-mm-dd
+                activeRow.children[idx].textContent = val;
+                // update data-label as well
+                const thText = activeRow.closest('table').querySelectorAll('thead th')[idx];
+                if(thText) activeRow.children[idx].setAttribute('data-label', thText.textContent.trim());
+            });
+            closeModal();
+        }
+
+        // attach dblclick handler to table rows (live)
+        document.addEventListener('dblclick', function(e){
+            const tr = e.target.closest('tbody tr');
+            if(!tr) return;
+            openModalForRow(tr);
+        });
+
+        btnCancel.addEventListener('click', closeModal);
+        btnSave.addEventListener('click', applyEditsToRow);
+
+        // close on overlay click outside modal
+        overlay.addEventListener('click', function(e){
+            if(e.target===overlay) closeModal();
+        });
+
+        // keyboard handling
+        document.addEventListener('keydown', function(e){
+            if(overlay.style.display==='flex'){
+                if(e.key==='Escape') closeModal();
+                if(e.key==='Enter' && e.target.tagName!=='TEXTAREA'){
+                    // prevent form submission in other contexts
+                    e.preventDefault();
+                    applyEditsToRow();
+                }
+            }
+        });
+    })();
+    </script>
+</body>
+</html>
